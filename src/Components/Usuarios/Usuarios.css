@@ -1,0 +1,10 @@
+.section_usuario{
+    min-height: 100vh;
+}
+
+
+.usuarios_contenedor{
+    display: flex;
+    padding: 20px;
+    flex-wrap: wrap;
+}

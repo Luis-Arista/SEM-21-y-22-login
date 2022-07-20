@@ -1,0 +1,15 @@
+.alerta_container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(255, 0, 0);
+    text-align: center;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.alerta p{
+    color: wheat;
+
+}
