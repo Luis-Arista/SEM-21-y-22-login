@@ -5,7 +5,7 @@ import './UsuarioCard.css'
 const UsuarioCard = ( { logeado , cargar,  usuario }) => {
 
   const eliminar = async( id ) => {
-    let url = `http://localhost:4000/api/v1/usuario/${id}`
+    let url = `http://localhost:4000/api/v1/users/${id}`
     await axios.delete( url )
     cargar()
    }

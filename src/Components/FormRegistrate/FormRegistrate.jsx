@@ -1,7 +1,9 @@
 import React , { useState } from 'react'
 import  axios  from 'axios'
 import './FormRegistrate.css'
+import env from 'react-dotenv'
 
+ 
 const FormRegistrate = ( { aviso , setAviso , cargar } ) => {
 
     const [ nombre , setNombre ] = useState('')
@@ -13,7 +15,7 @@ const FormRegistrate = ( { aviso , setAviso , cargar } ) => {
 
     const registrarse = async() => {
        if( nombre !== '' && apellido !== '' && usuario !== '' && contraseña !== '' && email !== '' && roll !== '' ){
-        const url = 'http://localhost:4000/api/v1/usuario'
+        const URL_ROOT = `${env.REACT_API}/registrar`
         let db = {
             nombre: nombre,
             apellido: apellido,
@@ -22,7 +24,7 @@ const FormRegistrate = ( { aviso , setAviso , cargar } ) => {
             contraseña: contraseña,
             roll: roll
         }
-        await axios.post( url , db )
+        await axios.post( URL_ROOT , db )
         resetearCampos()
         cargar()
        } else {
@@ -47,7 +49,7 @@ const FormRegistrate = ( { aviso , setAviso , cargar } ) => {
                 <div className="formulario_titulo">
                     <h2>Registra un nuevo usuario</h2>
                 </div>
-                <div className="form">
+                <form className="form">
                     <div className="form_input">
                         <input value={nombre} onChange={ (e) =>{ setNombre( e.target.value ) ; setAviso('no')}} type="text" />
                         <label style={ nombre !== '' ? {top: '-20px', left : '0' , color: "#03e9f4", fontSize: '12px'} : {}} > Nombre</label>
@@ -81,16 +83,16 @@ const FormRegistrate = ( { aviso , setAviso , cargar } ) => {
                         </select>
                         { aviso === 'si' && roll ==='' ? <p className='campo_blanco'>*</p> : '' }
                     </div>
-                </div>
-                <div className="boton">
-                    <button onClick={ () => registrarse()}>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        Registrar
-                    </button>
-                </div>
+                    <div className="boton">
+                        <button onClick={ () => registrarse()}>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            Registrar
+                        </button>
+                    </div>
+                </form>
             </div>
        </div>
     </section>

@@ -11,16 +11,16 @@ const Usuarios = ( { resultado } ) => {
     const [ logeado , setlogeado ] = useState('')
 
     const cargarUsuario = async() => {
-        let url = `http://localhost:4000/api/v1/usuario/${resultado}`
+        let url = `http://localhost:4000/api/v1/todos/${resultado}`
         const respuesta = await axios.get(url)
         setlogeado( respuesta.data)
-    }
+    } 
 
     const [ usuarios , setUsuarios ] = useState([])
     const [ aviso , setAviso ] = useState('no')
 
     const cargar = async() => {
-        let url = 'http://localhost:4000/api/v1/usuario'
+        let url = 'http://localhost:4000/api/v1/todos'
         const respuesta = await axios.get(url)
         setUsuarios(respuesta.data)
     }

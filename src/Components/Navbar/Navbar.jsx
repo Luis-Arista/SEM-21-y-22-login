@@ -1,19 +1,16 @@
 import React from 'react'
 import './Navbar.css'
+import { Link } from 'react-router-dom'
 
-const Navbar = ( { logeado } ) => {
+const Navbar = () => {
 
 
   return (
     <header>
         <nav>
-            <div className="navbar_nombre">
-                <h2>Hola: {logeado.nombre} {logeado.apellido}</h2>
-            </div>
-            <div className="navbar_menu">
-                <p>{logeado.roll}</p>
-                <a href="http://localhost:3000">Cerrar Secion</a>
-            </div>
+            <Link className='navbar_boton' to='/'>Home</Link>
+            <Link className='navbar_boton' to='/login'>Login</Link>
+            <Link className='navbar_boton' to='/singup'>Registrate</Link>
         </nav>
     </header>
   )

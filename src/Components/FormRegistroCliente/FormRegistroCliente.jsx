@@ -1,22 +1,25 @@
-import React , { useState } from 'react'
+import React , { useState  } from 'react'
 import axios from 'axios'
 import './FormRegistroCliente.css'
+import { Link } from 'react-router-dom'
+import './FormRegistroCliente.css'
 
-const FormRegistroCliente = ( { setRegistrar , aviso , setAviso }) => {
+  
 
- 
+const FormRegistroCliente = ( ) => {
+
 
     const [ nombre , setNombre ] = useState('')
     const [ apellido , setApellido ] = useState('')
     const [ usuario , setUsuario ] = useState('')
     const [ contraseña , setContraseña ] = useState('')
     const [ email , setEmail ] = useState('')
-    const [ roll , setRoll ] = useState('Cliente')
+    const [ roll ] = useState('Cliente')
 
     const registrarse = async() => {
         if( nombre !== '' && apellido !== '' && usuario !== '' && contraseña !== '' && email !== '' ){
-         const url = 'http://localhost:4000/api/v1/usuario'
-         let db = {
+         const URL_ROOT = `http://localhost:4000/api/v1/registrar`
+          let db = {
              nombre: nombre,
              apellido: apellido,
              usuario: usuario,
@@ -24,11 +27,10 @@ const FormRegistroCliente = ( { setRegistrar , aviso , setAviso }) => {
              contraseña: contraseña,
              roll: roll
          }
-         await axios.post( url , db )
+         await axios.post( URL_ROOT , db )
          resetearCampos()
-         setRegistrar('no')
         } else {
-         setAviso('si')
+          
         }
      }
  
@@ -38,7 +40,6 @@ const FormRegistroCliente = ( { setRegistrar , aviso , setAviso }) => {
          setUsuario('')
          setContraseña('')
          setEmail('')
-         setRoll('')
      }
 
   return (
@@ -48,53 +49,54 @@ const FormRegistroCliente = ( { setRegistrar , aviso , setAviso }) => {
                 <div className="formulario_titulo">
                     <h2>Registra un nuevo usuario</h2>
                 </div>
-                <div className="form">
+                <form className='form' action="#">
                     <div className="form_input">
-                        <input value={nombre} onChange={ (e) =>{ setNombre( e.target.value ) ; setAviso('no')}} type="text" />
+                        <input value={nombre} onChange={ (e) =>{ setNombre( e.target.value )}} type="text" />
                         <label style={ nombre !== '' ? {top: '-20px', left : '0' , color: "#03e9f4", fontSize: '12px'} : {}} > Nombre</label>
-                        { aviso === 'si' && nombre ==='' ? <p className='campo_blanco'>*</p> : '' }
                     </div>
                     <div className="form_input">
-                        <input value={apellido} onChange={ (e) => {setApellido( e.target.value ) ; setAviso('no')}}  type="text" />
+                        <input value={apellido} onChange={ (e) => {setApellido( e.target.value ) }}  type="text" />
                         <label style={ apellido !== '' ? {top: '-20px', left : '0' , color: "#03e9f4", fontSize: '12px'} : {}}>Apellido</label>
-                        { aviso === 'si' && apellido ==='' ? <p className='campo_blanco'>*</p> : '' }
                     </div>
                     <div className="form_input">
-                        <input value={usuario} onChange={ (e) =>{ setUsuario( e.target.value ) ; setAviso('no')} }  type="text" />
+                        <input value={usuario} onChange={ (e) =>{ setUsuario( e.target.value ) } }  type="text" />
                         <label style={ usuario !== '' ? {top: '-20px', left : '0' , color: "#03e9f4", fontSize: '12px'} : {}} >Usuario</label>
-                        { aviso === 'si' && usuario ==='' ? <p className='campo_blanco'>*</p> : '' }
                     </div>
                     <div className="form_input">
-                        <input value={email} onChange={ (e) => {setEmail( e.target.value ) ; setAviso('no')} }  type="email" />
+                        <input value={email} onChange={ (e) => {setEmail( e.target.value )} }  type="email" />
                         <label style={ email !== '' ? {top: '-20px', left : '0' , color: "#03e9f4", fontSize: '12px'} : {}} >Correo</label>
-                        { aviso === 'si' && email ==='' ? <p className='campo_blanco'>*</p> : '' }
                     </div>
                     <div className="form_input">
-                        <input value={contraseña} onChange={ (e) => {setContraseña( e.target.value ) ; setAviso('no')} }  type="password" />
+                        <input value={contraseña} onChange={ (e) => {setContraseña( e.target.value ) } }  type="password" />
                         <label style={ contraseña !== '' ? {top: '-20px', left : '0' , color: "#03e9f4", fontSize: '12px'} : {}} >Contrasela</label>
-                        { aviso === 'si' && contraseña ==='' ? <p className='campo_blanco'>*</p> : '' }
                     </div>
-                </div>
-                <div className="boton">
-                    <button onClick={ () => registrarse()}>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        Registrar
-                    </button>
-                </div>
-                <div className="boton">
-                    <button onClick={ () => setRegistrar('no')}>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        Volver
-                    </button>
-                </div>
+                    <div className="boton">
+                        <Link to='/singup'>
+                            <button onClick={ () => registrarse()}>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                Registrar
+                            </button>
+                        </Link>
+                    </div>
+                    <div className="boton">
+                        <Link to='/'>
+                            <button >
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                Volver
+                            </button>
+                        </Link>
+                    </div>
+                </form>
             </div>
        </div>
+       <div>
+         </div>
     </section>
   )
 }

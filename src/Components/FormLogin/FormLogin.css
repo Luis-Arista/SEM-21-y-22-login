@@ -48,6 +48,17 @@
     transition: 0.5s;
     pointer-events: none;
 }
+.ver{
+    position: absolute;
+    right: 15px;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+}
+
+.ver svg{
+    background-color: transparent;
+}
 
 .usuario_box input:focus ~ label  {
     top: -20px;

@@ -3,36 +3,22 @@ nav{
     max-width: 93rem;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
 }
-.navbar_nombre h2{
-    color: white;
-    margin: 0;
-}
+ 
 
-.navbar_menu{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.navbar_menu p{
-    margin: 0;
-    color: white;
-    margin: 10px;
-}
-
-.navbar_menu a{
+.navbar_boton {
     color: white;
     text-decoration: none;
     padding: 10px 20px;
     font-weight: bolder;
     background-color: rgba(0,0,0,.5);
+    margin: 0 15px;
 
 }
 
-.navbar_menu a:hover{
+.navbar_boton:hover{
     background-color: #03e9f4;
     color: #fff;
     box-shadow: 0 0 5px #03e9f4,

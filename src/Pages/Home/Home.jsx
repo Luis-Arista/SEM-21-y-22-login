@@ -1,31 +1,41 @@
-import React , { useState } from 'react'
-import Alerta from '../../Components/Alerta/Alerta';
-import AlertaForm from '../../Components/Alerta/AlertaForm';
-import FormLogin from '../../Components/FormLogin/FormLogin'
-import FormRegistroCliente from '../../Components/FormRegistroCliente/FormRegistroCliente';
-import Usuarios from '../../Components/Usuarios/Usuarios'
-
+import React , { useContext } from 'react'
+import { UserContext } from '../../Context/UserContext'; 
+import { ColorContext } from '../../Context/ColorContext'
+import { Link } from 'react-router-dom';
+import './Home.css'
+ 
+ 
 const Home = () => {
 
-    const [ resultado , setResutlado ] = useState('Error')
-    const [ aviso , setAviso ] = useState('no')
-    const [ registrar , setRegistrar ] = useState('no')
-   
+  const { color , setColor } = useContext( ColorContext )
+  const { colorTexto , setColorTexto } = useContext( ColorContext )
+
+  const { user } = useContext( UserContext )
+
+ 
+ const cambiarTema = () => {
+    if (color === 'black') {
+      setColor( 'white')
+      setColorTexto('black')
+    } else {
+      setColor( 'black')
+      setColorTexto('white')
+    }
+ }
+
   return (
-    <div>
-        {
-          registrar === 'no' ? 
-          <div>
-              { resultado === 'Error' ? <FormLogin setRegistrar={setRegistrar} setAviso={setAviso} setResutlado={setResutlado}  /> : <Usuarios resultado={resultado._id} /> }
-         </div> : <FormRegistroCliente setRegistrar={setRegistrar} aviso={aviso} setAviso={setAviso} />
-        }
-        <div>
-            { aviso === 'si' ? <Alerta /> : '' }
-        </div>
-        <div>
-          { aviso === 'si' && registrar === 'si' ? <AlertaForm /> : ''}
-        </div>
-    </div>
+   <section style={ { background: `${color}` }  } className='section_home'>
+    
+    <h1 style={{color: `${colorTexto}`}} >Hola {user === undefined ? 'sin usuario' : user.nombre  }</h1>
+    <p style={{color: `${colorTexto}`}} >{user === undefined ? 'sin usuario' : user.email}</p>
+
+    <button onClick={ () => cambiarTema() } >{ color === 'white' ? 'Tema obscuro' : 'Tema claro' }</button>
+    
+    <Link to = { user === undefined  ? '/login' : '/' }>
+        <button>{ user === undefined ? 'Inicia secion para comprar' : 'comprar' }</button>
+    </Link>
+
+   </section>
   )
 }
 
